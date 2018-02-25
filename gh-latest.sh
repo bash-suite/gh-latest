@@ -3,6 +3,9 @@
 # `gh-latest.sh` is as imple utility to get the **latest release version** from GitHub repository
 #
 
+# set -e : Exit the script if any statement returns a non-true return value.
+set -e
+
 # Default values
 readonly progname=$(basename $0)
 
@@ -10,10 +13,11 @@ readonly progname=$(basename $0)
 function getHelp() {
     cat << USAGE >&2
 
-Usage: $progname [user repo] [OPTIONS] [-- command args]
+Usage: $progname [user repo] [OPTIONS]
 
     -u | --user         Github user olding the repository
     -r | --repo         Github repository
+    -T | --token        Github token
 
 Alternatively, you can specify the user and the repo in the right order.
 
@@ -43,6 +47,7 @@ while [ $# -gt 0 ]; do
 
         -u=*|--user=*)
             USER=$(printf "%s" "$1" | cut -d = -f 2)
+            [ -z "$USER" ] && break
             shift 1
         ;;
 
@@ -54,6 +59,17 @@ while [ $# -gt 0 ]; do
 
         -r=*|--repo=*)
             REPO=$(printf "%s" "$1" | cut -d = -f 2)
+            [ -z "$REPO" ] && break
+            shift 1
+        ;;
+
+        -T|--token)
+            TOKEN="$2"
+            shift 2
+        ;;
+
+        -T=*|--token=*)
+            TOKEN=$(printf "%s" "$1" | cut -d = -f 2)
             shift 1
         ;;
 
@@ -63,7 +79,7 @@ while [ $# -gt 0 ]; do
         ;;
 
         *)
-            echoerr "Invalid argument '$1'. Use --help to see the valid options"
+            echo "Invalid argument '$1'. Use --help to see the valid options"
             exit 1
         ;;
 
@@ -92,15 +108,11 @@ if [ $JQ -ne 0 ]; then
     exit 1
 fi
 
-
-# Default values
+# Github API
 API='https://api.github.com'
-TAG='latest'
 
 # Get the latest version
-VERSION=$(curl -s $API/repos/$USER/$REPO/releases/$TAG | jq -r ".tag_name")
-if [ $VERSION = 'null' ]; then
-    echo ''
-else
-    echo $VERSION
-fi
+VERSION=$(curl ${TOKEN:+ -H "Authorization: token $TOKEN"} -s $API/repos/$USER/$REPO/releases/latest | jq -r ".tag_name")
+
+# Return version
+[ $VERSION = 'null' ] && echo '' || echo $VERSION
