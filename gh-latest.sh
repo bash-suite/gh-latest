@@ -112,7 +112,7 @@ fi
 API='https://api.github.com'
 
 # Get the latest version
-VERSION=$(curl ${TOKEN:+ -H "Authorization: token $TOKEN"} -s $API/repos/$USER/$REPO/releases/latest | jq -r ".tag_name")
+VERSION=$(curl ${TOKEN:+ -H "Authorization: token $TOKEN"} ${HTTP_PROXY:+ -x $HTTP_PROXY} -s $API/repos/$USER/$REPO/releases/latest | jq -r ".tag_name")
 
 # Return version
 [ $VERSION = 'null' ] && echo '' || echo $VERSION
