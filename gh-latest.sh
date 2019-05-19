@@ -22,8 +22,8 @@ Usage: $progname [user repo] [OPTIONS]
 Alternatively, you can specify the user and the repo in the right order.
 
 Examples:
-    $progname -u craftshell -r wait-host      Get the latest release version of wait-host
-    $progname craftshell wait-host            Get the latest release version of wait-host
+    $progname -u dockboxsh -r wait-host      Get the latest release version of wait-host
+    $progname dockboxsh wait-host            Get the latest release version of wait-host
 
 USAGE
 }
