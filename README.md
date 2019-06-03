@@ -14,8 +14,8 @@ Usage: gh-latest.sh [user repo] [OPTIONS]
 Alternatively, you can specify the user and the repo in the right order.
 
 Examples:
-    gh-latest.sh -u dockboxsh -r wait-host      Get the latest release version of wait-host
-    gh-latest.sh dockboxsh wait-host            Get the latest release version of wait-host
+    gh-latest.sh -u bash-suite -r wait-host      Get the latest release version of wait-host
+    gh-latest.sh bash-suite wait-host            Get the latest release version of wait-host
 ```
 
 ## GitHub token
@@ -25,7 +25,7 @@ If you don't want to face a [Github rate limit](https://developer.github.com/v3/
 ```sh
 export MYTOKEN="13546843257517438573"
 
-./gh-downloader.sh -t $MYTOKEN -u dockboxsh -r wait-host -t latest -f wait-host.sh -o /usr/sbin/wait-host
+./gh-downloader.sh -t $MYTOKEN -u bash-suite -r wait-host -t latest -f wait-host.sh -o /usr/sbin/wait-host
 ```
 
 Get a GitHub personal token from here:  [github.com/settings/tokens](github.com/settings/tokens)
