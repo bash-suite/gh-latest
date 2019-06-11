@@ -10,7 +10,7 @@ set -e
 readonly progname=$(basename $0)
 
 # Display help message
-function getHelp() {
+getHelp() {
     cat << USAGE >&2
 
 Usage: $progname [user repo] [OPTIONS]
