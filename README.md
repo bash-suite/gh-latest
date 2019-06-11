@@ -1,8 +1,9 @@
-# gh-latest
+# ![](https://github.com/docker-suite/artwork/raw/master/logo/png/logo_32.png) gh-latest
+![License: MIT](https://img.shields.io/github/license/docker-suite/goss.svg?color=green&style=flat-square)
 
 Simple utility to get the **latest release version** from GitHub repository
 
-## Usage
+## ![](https://github.com/docker-suite/artwork/raw/master/various/pin/png/pin_16.png) Usage
 
 ```sh
 Usage: gh-latest.sh [user repo] [OPTIONS]
@@ -18,7 +19,7 @@ Examples:
     gh-latest.sh bash-suite wait-host            Get the latest release version of wait-host
 ```
 
-## GitHub token
+## ![](https://github.com/docker-suite/artwork/raw/master/various/pin/png/pin_16.png) GitHub token
 
 If you don't want to face a [Github rate limit](https://developer.github.com/v3/rate_limit/) use a personnal token:
 
